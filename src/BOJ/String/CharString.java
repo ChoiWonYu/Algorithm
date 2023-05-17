@@ -11,9 +11,7 @@ public class CharString {
         String s=br.readLine();
         int num=Integer.parseInt(br.readLine());
 
-        sb.append(s);
-
-        System.out.println(sb.substring(num-1,num));
+        System.out.println(s.charAt(num-1));
 
     }
 }
