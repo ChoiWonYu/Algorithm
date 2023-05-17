@@ -12,8 +12,11 @@ public class FlipBascket {
         numArray[lIdx]=storeValue;
     }
     public static void revertArray(int[] numArray,int rIdx,int lIdx){
-        for(int i=0;i<=(lIdx+rIdx)/2-rIdx;i++){
-            swap(numArray,rIdx+i,lIdx-i);
+        int tmp=0;
+        while(rIdx<lIdx){
+            swap(numArray,rIdx,lIdx);
+            rIdx++;
+            lIdx--;
         }
     }
 
