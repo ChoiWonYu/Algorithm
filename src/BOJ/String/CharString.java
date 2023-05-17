@@ -12,6 +12,6 @@ public class CharString {
         int num=Integer.parseInt(br.readLine());
 
         System.out.println(s.charAt(num-1));
-
+        //문자열 문자 인덱싱 charAt
     }
 }
