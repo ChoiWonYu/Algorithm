@@ -31,6 +31,7 @@ class SubstractionableCalculator extends Calculator {
 
 public class Practice {
     public static void main(String[] args) {
+        String d="d";
        char[][] c=new char[4][4];
        System.out.println((int)c[0][0]);
     }
