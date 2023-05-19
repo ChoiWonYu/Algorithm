@@ -24,7 +24,6 @@ public class Score {
 
         ArrayList<Double>arr=new ArrayList<Double>(20);
         double gradeSum=0;
-        double sum=0;
         double scoreSum=0;
         for(int i=0;i<20;i++) {
             StringTokenizer st = new StringTokenizer(br.readLine());
@@ -34,6 +33,7 @@ public class Score {
             if (grade.equals("P")) {
                 continue;
             }
+
             scoreSum += score;
             double myGrade= caculate(grade);
             gradeSum+=myGrade*score;
