@@ -22,6 +22,12 @@ public class Company {
             }
             else continue;
         }
+        Set<String> s=P.keySet();
+         ArrayList<String> l=new ArrayList<String>(s);
+        l.sort(Collections.reverseOrder());
+        for(String i:l){
+            System.out.println(i);
+        }
 
     }
 }

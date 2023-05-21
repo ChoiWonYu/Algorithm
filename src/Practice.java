@@ -1,3 +1,5 @@
+import java.util.*;
+
 class Calculator {
     int left, right;
 
@@ -31,8 +33,7 @@ class SubstractionableCalculator extends Calculator {
 
 public class Practice {
     public static void main(String[] args) {
-        String d="d";
-       char[][] c=new char[4][4];
-       System.out.println((int)c[0][0]);
+        ArrayList<String>s=new ArrayList<String>();
+        Collections.sort(s);
     }
 }
