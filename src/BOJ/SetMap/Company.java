@@ -8,7 +8,7 @@ public class Company {
     public static void main(String[] args)throws Exception{
         BufferedReader br=new BufferedReader(new InputStreamReader(System.in));
         int T=Integer.parseInt(br.readLine());
-        HashMap P=new HashMap();
+        TreeMap P=new TreeMap(Collections.reverseOrder());
 
         for(int i=0;i<T;i++){
             StringTokenizer st=new StringTokenizer(br.readLine());
@@ -22,11 +22,9 @@ public class Company {
             }
             else continue;
         }
-        Set<String> s=P.keySet();
-         ArrayList<String> l=new ArrayList<String>(s);
-        l.sort(Collections.reverseOrder());
-        for(String i:l){
-            System.out.println(i);
+        Set<Map.Entry<String,String>> se=P.entrySet();
+        for(Map.Entry<String,String>e:se){
+            System.out.println(e.getKey());
         }
 
     }
