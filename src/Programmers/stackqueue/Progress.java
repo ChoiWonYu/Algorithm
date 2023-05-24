@@ -46,11 +46,6 @@ public class Progress {
         return answer;
     }
     public static void main(String[] args){
-        int[]a={93,30,55};
-        int[]b={1,30,5};
-       int[] arr=solution(a,b);
-       for(int i:arr){
-           System.out.println(i);
-       }
+        Queue<Integer> q=new LinkedList<Integer>();
     }
 }
