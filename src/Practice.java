@@ -33,17 +33,7 @@ class SubstractionableCalculator extends Calculator {
 
 public class Practice {
     public static void main(String[] args) {
-        Integer[] arr={1,2,3};
-        ArrayList<Integer>s=new ArrayList<Integer>(Arrays.asList(arr));
-        arr=s.toArray(new Integer[0]);
-
-        for(Integer i:s){
-            System.out.println(i);
-        }
-
-        for(Integer i:arr){
-            System.out.println(i);
-        }
+       PriorityQueue<Integer> minH=new PriorityQueue<>();
 
     }
 }
