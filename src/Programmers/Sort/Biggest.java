@@ -2,28 +2,30 @@ package Programmers.Sort;
 import java.util.*;
 
 public class Biggest {
-    public static ArrayList<String> solution(int[] numbers){
-        ArrayList<String> result=new ArrayList<String>();
+    public static Comparator<String> comp=new Comparator<String>(){
+        public int compare(String r,String l){
+        return (l+r).compareTo(r+l);
+    }
+    };
+
+    public static String solution(int[] numbers){
+        String[] s=new String[numbers.length];
         for(int i=0;i<numbers.length;i++){
-            StringBuilder sb=new StringBuilder();
-            sb.append(numbers[i]);
-            for(int j=0;j<numbers.length;j++){
-                if(j!=i){
-                    sb.append(numbers[j]);
-                }
-            }
-            result.add(sb.toString());
+            s[i]=Integer.toString(numbers[i]);
         }
-        return result;
+        Arrays.sort(s,comp);
+        StringBuilder sb=new StringBuilder();
+        for(String st:s)sb.append(st);
+
+        return sb.toString();
     };
 
 
     public static void main(String[] args){
         int[] arr={3, 30, 34, 5, 9};
-        ArrayList<String> result=solution(arr);
-        for(String s:result){
-            System.out.println(s);
-        }
+        String result=solution(arr);
+        System.out.println(result);
     }
 
-}
+    };
+
