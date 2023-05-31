@@ -1,66 +1,30 @@
 package Programmers.BruteForce;
+import java.util.*;
 
 public class Test {
     public static int[] solution(int[] answers) {
-        int[] count=new int[3];
-        for(int i=0;i<answers.length;i++){
-            if(answers[i]==(i%5)+1)count[0]++;
-            switch(i%8){
-                case 0:
-                case 2:
-                case 4:
-                case 6:
-                    if(answers[i]==2)count[1]++;
-                    break;
-                case 1:
-                    if(answers[i]==1)count[1]++;
-                    break;
-                case 3:
-                    if(answers[i]==3)count[1]++;
-                    break;
-                case 5:
-                    if(answers[i]==4)count[1]++;
-                    break;
-                case 7:
-                    if(answers[i]==5)count[1]++;
-                    break;
-            }
+        int[][] patterns = {
+                {1, 2, 3, 4, 5},
+                {2, 1, 2, 3, 2, 4, 2, 5},
+                {3, 3, 1, 1, 2, 2, 4, 4, 5, 5}
+        };
 
-                switch(i%10){
-                    case 0:
-                    case 1:
-                        if(answers[i]==3)count[2]++;
-                        break;
-                    case 2:
-                    case 3:
-                        if(answers[i]==1)count[2]++;
-                        break;
-                    case 4:
-                    case 5:
-                        if(answers[i]==2)count[2]++;
-                        break;
-                    case 6:
-                    case 7:
-                        if(answers[i]==4)count[2]++;
-                        break;
-                    default:
-                        if(answers[i]==5)count[2]++;
-                }
-        }
-        int max=0;
-        int maxCount=0;
-        for(int i:count){
-            if(max<i) {
-                max = i;
-                maxCount=1;
+        int[] hit = new int[3];
+        for(int i = 0; i < hit.length; i++) {
+            for(int j = 0; j < answers.length; j++) {
+                if(patterns[i][j % patterns[i].length] == answers[j]) hit[i]++;
             }
-            else if(max==i)maxCount++;
         }
-        int[] answer=new int[maxCount];
-        int idx=0;
-        for(int i=0;i<3;i++){
-            if(count[i]==max)answer[idx++]=i+1;
-        }
+
+        int max = Math.max(hit[0], Math.max(hit[1], hit[2]));
+        List<Integer> list = new ArrayList<>();
+        for(int i = 0; i < hit.length; i++)
+            if(max == hit[i]) list.add(i + 1);
+
+        int[] answer = new int[list.size()];
+        int cnt = 0;
+        for(int num : list)
+            answer[cnt++] = num;
         return answer;
     }
 
