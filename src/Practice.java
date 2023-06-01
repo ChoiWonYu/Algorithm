@@ -16,6 +16,7 @@ enum Fruit{
 
 public class Practice {
     public static void main(String[] args){
-       Fruit a= Fruit.APPLE;
+        char c='c';
+      System.out.println(c=='c');
     }
 }
