@@ -16,7 +16,7 @@ enum Fruit{
 
 public class Practice {
     public static void main(String[] args){
-        char c='c';
-      System.out.println(c=='c');
+        String c="asdfasdf";
+      System.out.println(c.charAt(0)=='a');
     }
 }
