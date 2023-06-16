@@ -1,39 +1,22 @@
 package Programmers.Basic;
 
 public class Password {
-    public static boolean isInArr(char targetCh,int[] skipArr){
-        for(int i :skipArr){
-            if(i==targetCh)return true;
-        }
-        return false;
-    }
-    public static int[] getSkipArr(String skip){
-        int []arr=new int[skip.length()];
-        for(int i=0;i<skip.length();i++){
-            arr[i]=skip.charAt(i);
-        }
-        return arr;
-    }
-
-    public static char plusChar(char target){
-        if(target=='z')return 'a';
-        return (char)(target + 1);
-    }
-
 
     public static String solution(String s, String skip, int index) {
-        int[] skipArr=getSkipArr(skip);
-
-        StringBuilder sb=new StringBuilder();
-        for(int i=0;i<s.length();i++){
-            char targetChar=s.charAt(i);
-            for(int j=0;j<index;j++){
-                targetChar=plusChar(targetChar);
-                while(isInArr(targetChar,skipArr))targetChar=plusChar(targetChar);
+        StringBuilder answer=new StringBuilder();
+        for(char targetChar:s.toCharArray()){
+            char temp=targetChar;
+            int idx=0;
+            while(idx<index){
+                temp=temp=='z'?'a':(char)(temp+1);
+                if(!skip.contains(String.valueOf(temp))){
+                    idx+=1;
+                }
             }
-            sb.append(Character.toString(targetChar));
+            answer.append(temp);
         }
-        return sb.toString();
+        return answer.toString();
+
     }
 
     public static void main(String[] args){
