@@ -16,7 +16,9 @@ enum Fruit{
 
 public class Practice {
     public static void main(String[] args){
-        String c="asdfasdf";
-      System.out.println(c.charAt(0)=='a');
+        String d="01";
+        int x=Integer.parseInt(d);
+        System.out.println(x);
     }
+    //Arrays.toString()
 }
