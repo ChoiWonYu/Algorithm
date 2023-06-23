@@ -9,23 +9,26 @@ public class DivideString {
         for(int i=0;i<s.length();i++){
             if(targetChar=='?') {
                 targetChar = s.charAt(i);
+                answer++;
                 targetCount=1;
-                otherCount=0;
                 continue;
             }
+
             if(targetChar!=s.charAt(i))otherCount++;
             else if(targetChar==s.charAt(i))targetCount++;
+
             if(targetCount==otherCount) {
-                answer++;
                 targetChar='?';
+                targetCount=0;
+                otherCount=0;
             }
         }
 
-        return targetChar=='?'?answer:answer+1;
+        return answer;
     }
 
     public static void main(String[] args){
-        int result=solution("aaabbaccccabba");
+        int result=solution("banana");
         System.out.println(result);
     }
 }
