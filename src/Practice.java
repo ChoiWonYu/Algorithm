@@ -16,8 +16,7 @@ enum Fruit{
 
 public class Practice {
     public static void main(String[] args){
-        String s="sadkfjasdlf";
-        System.out.println(s.substring(0,s.length()));
+        System.out.println("banaan".substring(1,2));
     }
     //Arrays.toString()
 }
