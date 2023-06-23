@@ -16,9 +16,6 @@ public class ClosestWord {
     }
     public static void main(String[] main){
         int[] answer=solution("banana");
-        for(int i:answer){
-            System.out.println(i);
-
-        }
+        System.out.println(Arrays.toString(answer));
     }
 }
