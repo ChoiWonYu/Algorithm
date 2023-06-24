@@ -2,21 +2,15 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.*;
 
-enum Fruit{
-    APPLE("red"),BANANA("yellow"),PEACH("pink");
-    private String color;
-    Fruit(String color){
-        this.color=color;
+class Calculator{
+    final int x;
+    Calculator (){
+        x=1;
     }
-
-    String getColor(){
-        return this.color;
-    }
-};
-
+}
 public class Practice {
     public static void main(String[] args){
-        System.out.println("banaan".substring(1,2));
+        Calculator c=new Calculator();
+        System.out.println(c.x);
     }
-    //Arrays.toString()
 }
