@@ -4,13 +4,11 @@ public class Weapon {
     public static int getDivisor(int num){
 
         int cnt=0;
-        for(int i=1;i<=Math.sqrt(num);i++){
-            if(num%i==0) {
-                if(i*i==num)cnt+=1;
-                else cnt+=2;
-            }
+        if(Math.sqrt(num)%1==0)cnt++;
+        for(int i=1;i<Math.sqrt(num);i++){
+            if(num%i==0)cnt+=2;
         }
-        return num==1?1:cnt;
+        return cnt;
     }
 
     public static int solution(int number, int limit, int power) {
@@ -24,7 +22,7 @@ public class Weapon {
     }
 
     public static void main(String[] args){
-        int result=solution(5,3,2);
+        int result=solution(10,3,2);
         System.out.println(result);
     }
 }
