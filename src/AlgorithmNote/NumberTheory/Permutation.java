@@ -4,6 +4,7 @@ public class Permutation {
     public static void permutation(int[] arr,int[] out,boolean[] visited, int depth, int r){
         if(depth==r){
             System.out.println(Arrays.toString(out));
+            return;
         }
         for(int i=0;i<arr.length;i++){
             if(!visited[i]){
@@ -16,8 +17,8 @@ public class Permutation {
     }
 
     public static void main(String[] args){
-        int[] arr={6,3,10};
-        int r=3;
+        int[] arr={1,2,3};
+        int r=2;
         permutation(arr,new int[r],new boolean[arr.length],0,r);
     }
 }

@@ -16,7 +16,7 @@ public class Combination {
     }
     public static void main(String[] args){
         int[] nums=new int[]{1,2,3};
-        int r=3;
+        int r=2;
         combination(nums,new int[r],new boolean[nums.length],0,nums.length,r);
     }
 }
