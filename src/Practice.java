@@ -10,5 +10,5 @@ class Calculator{
 }
 public class Practice {
     public static void main(String[] args) {
-        System.out.println("ayaye".replaceFirst("aya",""));
+        System.out.println("hi aa".split(" ")[1]);
     }}
