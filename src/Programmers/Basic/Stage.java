@@ -46,7 +46,7 @@ class S  implements Comparable<S>{
 
     @Override
     public int compareTo(S o) {
-        int comp=fail*o.participate-o.fail*participate;
-        return comp==0?o.stageNum-stageNum : comp;
+        int flag=Long.compare((long)fail*o.participate,(long)o.fail*participate);
+        return flag==0?o.stageNum-stageNum : flag;
     }
 }
