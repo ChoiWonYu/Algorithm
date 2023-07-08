@@ -10,5 +10,8 @@ class Calculator{
 }
 public class Practice {
     public static void main(String[] args) {
-        System.out.println("hi aa".split(" ")[1]);
-    }}
+
+        String x="1";
+        System.out.println(Integer.valueOf(x));
+    }
+}
