@@ -10,8 +10,9 @@ class Calculator{
 }
 public class Practice {
     public static void main(String[] args) {
-
-        String x="1";
-        System.out.println(Integer.valueOf(x));
+        int n=9;
+        System.out.println(Integer.toBinaryString(n));
+        String x=Integer.toBinaryString(n);
+        System.out.println("0".repeat(5-x.length())+x);
     }
 }
