@@ -10,9 +10,8 @@ class Calculator{
 }
 public class Practice {
     public static void main(String[] args) {
-        int n=9;
-        System.out.println(Integer.toBinaryString(n));
-        String x=Integer.toBinaryString(n);
-        System.out.println("0".repeat(5-x.length())+x);
+        int[] arr=new int[] {1,2,3};
+        int n=Arrays.stream(arr).min().getAsInt();
+        int[] result=Arrays.stream(arr).filter(x->x!=n).toArray();
     }
 }
