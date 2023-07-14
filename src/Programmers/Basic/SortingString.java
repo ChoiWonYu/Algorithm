@@ -5,16 +5,9 @@ import java.util.Comparator;
 
 public class SortingString {
     public String[] solution(String[] strings, int n) {
-        Word[] arr=new Word[strings.length];
-        for(int i=0;i<strings.length;i++){
-            arr[i]=new Word(strings[i],strings[i].charAt(n));
-        }
-        Arrays.sort(arr);
-        String[] answer=new String[strings.length];
-        for(int i=0;i<strings.length;i++){
-            answer[i]=arr[i].word;
-        }
-        return answer;
+        return Arrays.stream(strings).map(s->new Word(s,s.charAt(n))).sorted()
+                .map(w->w.word).toArray(String[]::new);
+
     }
 
     public static void main(String[] args) {
