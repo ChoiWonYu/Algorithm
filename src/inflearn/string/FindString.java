@@ -10,6 +10,6 @@ public class FindString {
     public static void main(String[] args) {
         Scanner sc=new Scanner(System.in);
         int result=solution(sc.next(),sc.next().charAt(0));
-        System.out.println("result = " + result);
+        System.out.println(result);
     }
 }
