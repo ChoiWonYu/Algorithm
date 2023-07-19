@@ -7,15 +7,14 @@ public class ContinuousSequence {
   public static int solution2(int n, int[] arr) {
     int lt = 0, sum = 0, answer = 0;
     for (int rt = 0; rt < arr.length; rt++) {
+
+      sum += arr[rt];
       if (sum >= n) {
-        while (sum >= n) {
+        while (sum > n) {
           sum -= arr[lt++];
-          if (sum == n) {
-            answer++;
-          }
         }
+        if (sum == n) answer++;
       }
-      sum += arr[rt++];
     }
     return answer;
   }
@@ -62,7 +61,7 @@ public class ContinuousSequence {
       arr[i] = sc.nextInt();
     }
 
-    int result = solution(m, arr);
+    int result = solution2(m, arr);
     System.out.println(result);
   }
 
