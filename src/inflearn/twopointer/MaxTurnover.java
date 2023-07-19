@@ -4,12 +4,17 @@ import java.util.*;
 
 public class MaxTurnover {
   public static int solution(int[]turnover,int d){
-    int max=-1;
-    for(int i=0;i<=turnover.length-d;i++){
-      int n=0;
-      for(int j=i;j<i+d;j++)n+=turnover[j];
-      if(max<n)max=n;
+    int max;
+    int sum=0;
+    for(int i=0;i<d;i++)sum+=turnover[i];
+    max=sum;
+
+    for(int i=d;i<turnover.length;i++){
+      sum+=turnover[i];
+      sum-=turnover[i-d];
+      if(max<sum)max=sum;
     }
+
     return max;
   }
 
