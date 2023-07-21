@@ -6,18 +6,14 @@ public class Anagram {
 
   public static boolean solution(String a, String b) {
     Map<Character, Integer> aMap = new HashMap<>();
-    Map<Character, Integer> bMap = new HashMap<>();
 
     for (int i = 0; i < a.length(); i++) {
-      char targetA=a.charAt(i);
-      char targetB=b.charAt(i);
-
-      aMap.put(targetA,aMap.getOrDefault(targetA,0)+1);
-      bMap.put(targetB,bMap.getOrDefault(targetB,0)+1);
+      aMap.put(a.charAt(i),aMap.getOrDefault(a.charAt(i),0)+1);
     }
 
-    for(char c:aMap.keySet()){
-      if(aMap.get(c)!=bMap.getOrDefault(c,-1))return false;
+    for(char c:b.toCharArray()){
+      if(!aMap.containsKey(c)||aMap.get(c)==0)return false;
+      aMap.put(c,aMap.get(c)-1);
     }
     return true;
   }
