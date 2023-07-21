@@ -14,17 +14,18 @@ public class ClassPresident {
 
   private static char solution(String s) {
     Map<Character,Integer>m=new HashMap<>();
+    char answer=' ';
     s.chars().forEach(c->{
       m.put((char)c,m.getOrDefault((char)c,0)+1);
     });
-     int max=0;
-     for(int c:m.values()){
-       max=Math.max(max,c);
+     int max=Integer.MIN_VALUE;
+     for(char c:m.keySet()){
+       if(m.get(c)>max) {
+         max = m.get(c);
+         answer = c;
+       }
      }
 
-     for(char c:m.keySet()){
-       if(m.getOrDefault(c,0)==max)return c;
-     }
-     return 'z';
+     return answer;
   }
 }
