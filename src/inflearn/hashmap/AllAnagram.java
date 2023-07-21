@@ -22,21 +22,15 @@ public class AllAnagram {
   }
 
   public static boolean isAnagram(String a, String b) {
-    Map<Character, Integer> aChars = new HashMap<>();
-    Map<Character, Integer> bChars = new HashMap<>();
+    Map<Character, Integer> aMap = new HashMap<>();
 
     for (int i = 0; i < a.length(); i++) {
-      char aTarget = a.charAt(i);
-      char bTarget = b.charAt(i);
-
-      aChars.put(aTarget, aChars.getOrDefault(aTarget, 0) + 1);
-      bChars.put(bTarget, bChars.getOrDefault(bTarget, 0) + 1);
+      aMap.put(a.charAt(i),aMap.getOrDefault(a.charAt(i),0)+1);
     }
 
-    for (char s : aChars.keySet()) {
-      if (aChars.get(s) != bChars.getOrDefault(s, -1)) {
-        return false;
-      }
+    for(char c:b.toCharArray()){
+      if(!aMap.containsKey(c)||aMap.get(c)==0)return false;
+      aMap.put(c,aMap.get(c)-1);
     }
     return true;
   }
