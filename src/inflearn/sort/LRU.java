@@ -1,30 +1,29 @@
 package inflearn.sort;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 public class LRU {
 
   public static int[] solution(int n,int[] arr){
-    List<Integer> answer = new ArrayList<>();
-    for(int i=0;i<arr.length;i++){
-      if(answer.contains(arr[i])){
-        for(int j=0;j<answer.size();j++){
-          if(answer.get(j)==arr[i]) {
-            answer.remove(j);
-            break;
-          }
+    int[] answer=new int[n];
+    int hitIdx=0;
+    for(int i:arr){
+      hitIdx=-1;
+      for(int j=0;j<answer.length;j++)if(answer[j]==i)hitIdx=j;
+      if(hitIdx==-1){
+        for(int j=n-2;j>=0;j--){
+          answer[j+1]=answer[j];
         }
       }
-      else if(answer.size()>=n){
-        answer.remove(0);
+      else{
+        for(int j=hitIdx-1;j>=0;j--){
+          answer[j+1]=answer[j];
+        }
       }
-      answer.add(arr[i]);
+      answer[0]=i;
     }
-    int[] answerArr=new int[n];
-    for(int i=0;i<n;i++)answerArr[i]=answer.get(n-i-1);
-    return answerArr;
+
+    return answer;
   }
 
   public static void main(String[] args) {
