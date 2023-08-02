@@ -8,9 +8,7 @@ public class SameSum {
   static int sum=0,last;
   static int[] set;
   public static void dfs(int n,int s) {
-    if(n==last|answer.equals("YES")){
-      return;
-    }
+    if(n==last|s*2>sum)return;
     if(s*2==sum) {
       answer = "YES";
       return;
