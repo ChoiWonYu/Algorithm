@@ -8,7 +8,7 @@ public class Baduk {
 
   public static void dfs(int n, int s) {
     if(s<=maxWeight&&s>maxSum)maxSum=s;
-    if(n==weight.length)return;
+    if(n==weight.length|s>maxWeight)return;
     dfs(n+1,s+weight[n]);
     dfs(n+1,s);
   }
