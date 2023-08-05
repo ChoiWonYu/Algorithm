@@ -23,12 +23,13 @@ public class GuessPermutation {
   }
 
   public static void dfs(int idx) {
+    if(found)return;
+
     if (idx == N) {
       if(isM(comb))found=true;
       return;
     }
     for (int i = 0; i < N; i++) {
-      if(found)break;
       if(visited[i])continue;
       comb[idx] = nums[i];
       visited[i]=true;
