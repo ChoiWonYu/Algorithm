@@ -25,6 +25,17 @@ public class GetCombination {
     }
   }
 
+  public static void dfs2(int l,int s){
+    if(l==M) {
+      System.out.println(Arrays.toString(comb));
+      return;
+    }
+    for(int i=s;i<=N;i++){
+      comb[l]=i;
+      dfs2(l+1,i+1);
+    }
+  }
+
   public static void main(String[] args) {
     Scanner sc = new Scanner(System.in);
     N = sc.nextInt();
@@ -36,7 +47,7 @@ public class GetCombination {
     for (int i = 0; i < N; i++) {
       nums[i] = i + 1;
     }
-    dfs(0);
+    dfs2(0,1);
   }
 
 }
