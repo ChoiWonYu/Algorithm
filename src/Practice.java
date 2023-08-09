@@ -9,11 +9,10 @@ class Calculator{
     }
 }
 public class Practice {
-    public static void main(String[] args) {
-        Scanner sc=new Scanner(System.in);
-        String s=sc.next();
-        String st=sc.next();
-        System.out.println(s);
-        System.out.println("st = " + st);
+    public static void main(String[] args)throws Exception {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        int n=(int)reader.read();
+        int m=(int)reader.read();
+        System.out.println(n+" "+m);
     }
 }
