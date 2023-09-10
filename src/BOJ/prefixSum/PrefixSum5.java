@@ -16,14 +16,13 @@ public class PrefixSum5 {
         int m=Integer.parseInt(st.nextToken());
 
         int[][] numArr=new int[n+1][n+1];
-        int i,j,x1,y1,x2,y2,sum;
+        int i,j,x1,y1,x2,y2,sum,num;
 
         for ( i = 1; i <= n; i++) {
-            sum=0;
             st=new StringTokenizer(br.readLine());
             for ( j = 1; j <= n; j++) {
-                sum+=Integer.parseInt(st.nextToken());
-                numArr[i][j]=sum;
+                num=Integer.parseInt(st.nextToken());
+                numArr[i][j]=num+numArr[i-1][j]+numArr[i][j-1]-numArr[i-1][j-1];
             }
         }
 
@@ -34,11 +33,7 @@ public class PrefixSum5 {
             x2=Integer.parseInt(st.nextToken());
             y2=Integer.parseInt(st.nextToken());
 
-            sum=0;
-
-            for (j = x1; j <= x2; j++) {
-                sum+=numArr[j][y2]-numArr[j][y1-1];
-            }
+            sum=numArr[x2][y2]-numArr[x1-1][y2]-numArr[x2][y1-1]+numArr[x1-1][y1-1];
 
             sb.append(sum).append("\n");
         }
