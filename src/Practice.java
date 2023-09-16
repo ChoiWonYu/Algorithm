@@ -25,6 +25,6 @@ public class Practice {
         s2.add(4);
 
         s1.remove(4);
-        System.out.println(s1);
+        System.out.println(1/2);
     }
 }
