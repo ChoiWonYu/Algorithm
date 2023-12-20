@@ -19,18 +19,18 @@ public class ReverseWord2 {
                     sb.append(target.charAt(i));
                 }
                 sb.append(">");
-                reverseSb.delete(0, reverseSb.length());
+                reverseSb.setLength(0);
                 continue;
             }
             if (target.charAt(i) == ' ') {
                 sb.append(reverseSb.reverse()).append(" ");
-                reverseSb.delete(0, reverseSb.length());
+                reverseSb.setLength(0);
                 continue;
             }
             reverseSb.append(target.charAt(i));
         }
         sb.append(reverseSb.reverse()).append(" ");
-        reverseSb.delete(0, reverseSb.length());
+        reverseSb.setLength(0);
         System.out.println(sb);
     }
 }
