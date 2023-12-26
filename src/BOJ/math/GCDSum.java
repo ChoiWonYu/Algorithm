@@ -12,15 +12,15 @@ public class GCDSum {
         StringBuilder sb = new StringBuilder();
 
         int n = Integer.parseInt(br.readLine());
-        for (int i = 0; i < n; i++) {
-            StringTokenizer st = new StringTokenizer(br.readLine());
-            int m = Integer.parseInt(st.nextToken());
-            int[] nums = new int[m];
-            for (int j = 0; j < m; j++) {
-                nums[j] = Integer.parseInt(st.nextToken());
+            for (int i = 0; i < n; i++) {
+                StringTokenizer st = new StringTokenizer(br.readLine());
+                int m = Integer.parseInt(st.nextToken());
+                int[] nums = new int[m];
+                for (int j = 0; j < m; j++) {
+                    nums[j] = Integer.parseInt(st.nextToken());
+                }
+                sb.append(solve(nums)).append("\n");
             }
-            sb.append(solve(nums)).append("\n");
-        }
         System.out.println(sb);
     }
 
@@ -38,13 +38,10 @@ public class GCDSum {
     }
 
     private static int calculateGCD(int num1, int num2) {
-        while (true) {
-            int num3 = num1 % num2;
+        while (num2 != 0) {
+            int tmp = num1 % num2;
             num1 = num2;
-            num2 = num3;
-            if (num3 == 0) {
-                break;
-            }
+            num2 = tmp;
         }
         return num1;
     }
