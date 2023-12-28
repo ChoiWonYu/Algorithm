@@ -7,7 +7,7 @@ import java.util.Arrays;
 import java.util.StringTokenizer;
 
 public class CoinExchange {
-    
+
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
@@ -21,9 +21,7 @@ public class CoinExchange {
 
         int amount = Integer.parseInt(br.readLine());
         int[] dy = new int[amount + 1];
-        for (int i = 0; i <= amount; i++) {
-            dy[i] = Integer.MAX_VALUE;
-        }
+        Arrays.fill(dy, Integer.MAX_VALUE);
         dy[0] = 0;
 
         Arrays.sort(coins);
