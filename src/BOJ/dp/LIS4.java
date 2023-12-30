@@ -3,8 +3,7 @@ package BOJ.dp;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Stack;
 import java.util.StringTokenizer;
 
 public class LIS4 {
@@ -20,43 +19,33 @@ public class LIS4 {
         for (int i = 0; i < n; i++) {
             nums[i] = Integer.parseInt(st.nextToken());
         }
-
-        List<List<Integer>> answers = new ArrayList<>();
-        for (int i = 0; i < n; i++) {
-            answers.add(new ArrayList<>());
-        }
         int[] dp = new int[n];
-        int max = 1;
-        int cur;
+        int max;
+        int answer = 1;
         dp[0] = 1;
-        answers.get(0).add(nums[0]);
 
         for (int i = 1; i < n; i++) {
-            cur = 0;
-            answers.get(i).add(nums[i]);
+            max = 0;
             for (int j = 0; j < i; j++) {
-                if (nums[i] > nums[j] && cur < dp[j]) {
-                    cur = dp[j];
-                    answers.get(i).clear();
-                    answers.get(i).addAll(answers.get(j));
-                    answers.get(i).add(nums[i]);
+                if (nums[i] > nums[j] && max < dp[j]) {
+                    max = dp[j];
                 }
             }
-            dp[i] = cur + 1;
-            max = Math.max(max, dp[i]);
+            dp[i] = max + 1;
+            answer = Math.max(dp[i], answer);
         }
 
-        for (int i = 0; i < n; i++) {
-            if (answers.get(i).size() == max) {
-                sb.append(max).append("\n");
-
-                for (int j = 0; j < answers.get(i).size(); j++) {
-                    sb.append(answers.get(i).get(j)).append(" ");
-                }
-                break;
+        sb.append(answer).append("\n");
+        Stack<Integer> stack = new Stack<>();
+        for (int i = n - 1; i >= 0; i--) {
+            if (dp[i] == answer) {
+                stack.push(nums[i]);
+                answer--;
             }
         }
-
+        while (!stack.isEmpty()) {
+            sb.append(stack.pop()).append(" ");
+        }
         System.out.println(sb);
     }
 
