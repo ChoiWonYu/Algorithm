@@ -12,57 +12,36 @@ public class BitonicNumbers {
 
         int n = Integer.parseInt(br.readLine());
         int[] nums = new int[n];
-        int[][] dp = new int[n][n];
-        int result = 0;
 
         StringTokenizer st = new StringTokenizer(br.readLine());
         for (int i = 0; i < n; i++) {
             nums[i] = Integer.parseInt(st.nextToken());
         }
 
+        int[] rdp = new int[n];
+        int[] ldp = new int[n];
+
         for (int i = 0; i < n; i++) {
+            int rMax = 0;
+            int lMax = 0;
+            for (int j = 0; j <= i; j++) {
 
-            int maxLLength = 0;
-
-            for (int k = 0; k < i; k++) {
-                int lLength = 0;
-                if (nums[i] <= nums[k]) {
-                    dp[i][k] = 0;
-                    continue;
+                if (nums[i] > nums[j]) {
+                    rMax = Math.max(rMax, rdp[j]);
                 }
-                for (int j = 0; j < k; j++) {
-                    if (nums[i] > nums[k] && nums[k] > nums[j]) {
-                        lLength = Math.max(lLength, dp[i][j]);
-                    }
+                if (nums[n - i - 1] > nums[n - j - 1]) {
+                    lMax = Math.max(lMax, ldp[n - j - 1]);
                 }
-                dp[i][k] = lLength + 1;
-                maxLLength = Math.max(maxLLength, dp[i][k]);
             }
 
-            int maxRLength = 0;
-
-            for (int k = i + 1; k < n; k++) {
-                int rLength = 0;
-                if (nums[i] <= nums[k]) {
-                    dp[i][k] = 0;
-                    continue;
-                }
-                for (int j = i; j < k; j++) {
-                    if (nums[i] > nums[k] && nums[k] < nums[j]) {
-                        rLength = Math.max(rLength, dp[i][j]);
-                    }
-                }
-                dp[i][k] = rLength + 1;
-                maxRLength = Math.max(maxRLength, dp[i][k]);
-            }
-
-            result = Math.max(result, maxLLength + maxRLength + 1);
+            rdp[i] = rMax + 1;
+            ldp[n - i - 1] = lMax + 1;
         }
 
-//        int result = 0;
-//        for (int i = 0; i < n; i++) {
-//            result = Math.max(result, dp[i][n - 1]);
-//        }
+        int result = 0;
+        for (int i = 0; i < n; i++) {
+            result = Math.max(result, rdp[i] + ldp[i] - 1);
+        }
 
         System.out.println(result);
     }
