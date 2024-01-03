@@ -19,7 +19,10 @@ class Discuss implements Comparable<Discuss> {
     }
 
     public int compareTo(Discuss discuss) {
-        return start - discuss.start;
+        if (discuss.end == end) {
+            return start - discuss.start;
+        }
+        return end - discuss.end;
     }
 }
 
@@ -33,19 +36,17 @@ public class DiscussRoom {
 
         for (int i = 0; i < n; i++) {
             StringTokenizer st = new StringTokenizer(br.readLine());
-            d.add(new Discuss(Integer.parseInt(st.nextToken()), Integer.parseInt(st.nextToken())));
+            d.add(new Discuss(Integer.parseInt(st.nextToken()),
+                Integer.parseInt(st.nextToken())));
         }
 
         Collections.sort(d);
         int result = 1;
-        int minEnd = d.get(0).end;
-        for (int i = 1; i < n; i++) {
-
-            minEnd = Math.min(d.get(i).end, minEnd);
-
-            if (minEnd <= d.get(i).start) {
+        int endTime = d.get(0).end;
+        for (int i = 0; i < n; i++) {
+            if (endTime <= d.get(i).start) {
                 result++;
-                minEnd = d.get(i).end;
+                endTime = d.get(i).end;
             }
         }
         System.out.println(result);
