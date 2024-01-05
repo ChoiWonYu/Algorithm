@@ -8,28 +8,24 @@ public class Dwarf {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
-        List<Integer> l = new ArrayList<>();
+        int[] l = new int[9];
+
+        int sum = 0;
         for (int i = 0; i < 9; i++) {
-            l.add(Integer.parseInt(br.readLine()));
+            l[i] = Integer.parseInt(br.readLine());
+            sum += l[i];
         }
-        int sum;
 
         for (int i = 0; i < 9; i++) {
-            for (int j = i; j < 9; j++) {
-                sum = 0;
-                if (i == j) {
-                    continue;
-                }
+            for (int j = i + 1; j < 9; j++) {
+                if (100 == sum - l[i] - l[j]) {
+                    l[i] = 0;
+                    l[j] = 0;
+                    Arrays.sort(l);
 
-                for (int k = 0; k < 9; k++) {
-                    if (k == i || k == j) {
-                        continue;
+                    for (int k = 2; k < 9; k++) {
+                        System.out.println(l[k]);
                     }
-                    sum += l.get(k);
-                }
-                if (sum == 100) {
-                    printHeight(l, i, j);
-                    return;
                 }
             }
         }
