@@ -30,7 +30,9 @@ public class Tetromino {
 
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < m; j++) {
+                visited[i][j] = true;
                 dfs(0, i, j, 0);
+                visited[i][j] = false;
             }
         }
 
