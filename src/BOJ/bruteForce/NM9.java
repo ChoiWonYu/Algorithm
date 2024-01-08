@@ -1,12 +1,7 @@
 package BOJ.bruteForce;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.StringTokenizer;
+import java.io.*;
+import java.util.*;
 
 public class NM9 {
 
@@ -14,7 +9,7 @@ public class NM9 {
     static int n, m;
     static boolean[] visited;
     static StringBuilder sb = new StringBuilder();
-    static List<String> result = new ArrayList<>();
+    static Set<String> result = new LinkedHashSet<>();
 
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -46,11 +41,8 @@ public class NM9 {
             for (int i : print) {
                 sb.append(i).append(" ");
             }
-            if (!result.contains(sb.toString())) {
-                result.add(sb.toString());
-            }
-
             sb = new StringBuilder();
+            result.add(sb.toString());
             return;
         }
 
