@@ -21,39 +21,32 @@ public class NextPermutation {
             System.out.println(-1);
             return;
         }
+        int idx = n - 1;
+        //이전 숫자보다 큰 마지막 인덱스를 찾는다.
+        while (idx > 0 && nums[idx] < nums[idx - 1]) {
+            idx--;
+        }
 
-        for (int i = n - 1; i >= 0; i--) {
-            if (nums[i] > nums[i - 1]) {
-                int[] tmp = new int[n - i];
-                int min = 10001;
-                int minIdx = 0;
-                for (int j = i; j < n; j++) {
-                    tmp[j - i] = nums[j];
-                    if (min > tmp[j - i] && nums[i - 1] < tmp[j - i]) {
-                        min = tmp[j - i];
-                        minIdx = j - i;
-                    }
-                }
-                int t = nums[i - 1];
-                nums[i - 1] = tmp[minIdx];
-                tmp[minIdx] = t;
-
-                Arrays.sort(tmp);
-                for (int j = 0; j < i; j++) {
-                    sb.append(nums[j]).append(" ");
-                }
-                for (int j = 0; j < tmp.length; j++) {
-                    sb.append(tmp[j]).append(" ");
-                }
-                System.out.println(sb);
-                return;
-            }
-
-            if (i == 1) {
-                System.out.println(-1);
-                return;
+        int minNum = 100001;
+        int minIdx = -1;
+        for (int i = idx; i < n; i++) {
+            if (minNum > nums[i] && nums[i] > nums[idx - 1]) {
+                minNum = nums[i];
+                minIdx = i;
             }
         }
+
+        int t = nums[idx - 1];
+        nums[idx - 1] = nums[minIdx];
+        nums[minIdx] = t;
+
+        Arrays.sort(nums, idx, nums.length);
+
+        for (int i = 0; i < n; i++) {
+            sb.append(nums[i]).append(" ");
+        }
+
+        System.out.println(sb);
     }
 
 }
