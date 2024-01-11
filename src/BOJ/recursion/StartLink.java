@@ -2,12 +2,11 @@ package BOJ.recursion;
 
 import java.util.*;
 import java.io.*;
-import java.util.stream.*;
+import java.util.stream.IntStream;
 
 public class StartLink {
 
     static int[] nums;
-    static List<Integer> cur, opposite;
     static int[][] graph;
     static boolean[] visited;
     static int n, result = Integer.MAX_VALUE;
@@ -26,12 +25,6 @@ public class StartLink {
         }
 
         nums = new int[n];
-        cur = new ArrayList<>();
-        opposite = new ArrayList<>();
-        for (int i = 0; i < n / 2; i++) {
-            cur.add(i);
-            opposite.add(i);
-        }
         visited = new boolean[n];
 
         recursion(0, 0);
@@ -39,36 +32,52 @@ public class StartLink {
         System.out.println(result);
     }
 
-    private static void recursion(final int depth, final int index) {
-        if (depth == n / 2) {
-            opposite = IntStream.range(0, n)
-                .filter(num -> !cur.contains(num))
-                .boxed()
-                .collect(Collectors.toList());
+    private static void recursion(final int index, final int cnt) {
 
-            int sum = 0;
-            int oppositeSum = 0;
-            for (int i = 0; i < n / 2; i++) {
-                for (int j = 0; j < n / 2; j++) {
-                    sum += graph[cur.get(i)][cur.get(j)];
-                    oppositeSum += graph[opposite.get(i)][opposite.get(j)];
-                }
-            }
-
-            result = Math.min(Math.abs(sum - oppositeSum), result);
+        if (result == 0) {
             return;
         }
 
-        for (int i = index; i < n; i++) {
-            if (visited[i]) {
-                continue;
+        if (index == n && cnt == n / 2) {
+            int start = 0;
+            int link = 0;
+
+            for (int i = 0; i < n; i++) {
+                for (int j = 0; j < n; j++) {
+                    if (visited[i] != visited[j]) {
+                        continue;
+                    }
+
+                    if (visited[i]) {
+                        start += graph[j][i];
+                    } else {
+                        link += graph[i][j];
+                    }
+                }
+
             }
-
-            visited[i] = true;
-            cur.set(depth, i);
-            recursion(depth + 1, i + 1);
-            visited[i] = false;
+            result = Math.min(result, Math.abs(start - link));
+            return;
+//
+//            StringBuilder sb = new StringBuilder();
+//            IntStream.range(0, n)
+//                .filter(num -> visited[num])
+//                .forEach(num -> sb.append(num + 1));
+//
+//            System.out.println(sb);
+//            return;
         }
-    }
 
+        if (index >= n) {
+            return;
+        }
+
+        visited[index] = true;
+        recursion(index + 1, cnt + 1);
+        visited[index] = false;
+        recursion(index + 1, cnt);
+    }
 }
+
+
+
