@@ -2,6 +2,7 @@ package BOJ.recursion;
 
 import java.util.*;
 import java.io.*;
+import java.util.stream.IntStream;
 
 public class LinkStart {
 
@@ -24,18 +25,18 @@ public class LinkStart {
             }
         }
 
-        recursion(0, 0);
+        recursion(0);
 
         System.out.println(result);
     }
 
-    private static void recursion(final int depth, final int index) {
+    private static void recursion(final int index) {
 
         if (result == 0) {
             return;
         }
 
-        if (depth == n) {
+        if (index == n) {
             int cur = 0;
             int opposite = 0;
 
@@ -54,16 +55,19 @@ public class LinkStart {
             }
             result = Math.min(Math.abs(opposite - cur), result);
             return;
+//            StringBuilder sb = new StringBuilder();
+//            IntStream.range(0, n)
+//                .filter(num -> visited[num])
+//                .forEach(num -> sb.append(num + 1));
+//
+//            System.out.println(sb);
+//            return;
         }
-        for (int i = index; i < n; i++) {
-            if (visited[i]) {
-                continue;
-            }
-            visited[i] = true;
-            recursion(depth + 1, i + 1);
-            visited[i] = false;
-            recursion(depth + 1, i + 1);
-        }
-    }
 
+        visited[index] = true;
+        recursion(index + 1);
+        visited[index] = false;
+        recursion(index + 1);
+    }
 }
+
