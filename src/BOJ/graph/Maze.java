@@ -33,32 +33,30 @@ public class Maze {
         d.add(new int[]{0, 0});
 
         int cnt = 0;
-        int lv = 1;
-        int lvCnt = 1;
         while (!d.isEmpty()) {
-            if (cnt == lvCnt) {
-                lvCnt = d.size();
-                lv++;
-                cnt = 0;
-            }
-            int[] cur = d.poll();
-            if (cur[0] == n - 1 && cur[1] == m - 1) {
-                break;
-            }
-            for (int i = 0; i < dx.length; i++) {
-                int curX = cur[0] + dx[i];
-                int curY = cur[1] + dy[i];
-                if (!isValid(curX, curY)) {
-                    continue;
-                }
+            int len = d.size();
+            for (int j = 0; j < len; j++) {
+                int[] cur = d.poll();
 
-                visited[curX][curY] = true;
-                d.add(new int[]{curX, curY});
+                if (cur[0] == n - 1 && cur[1] == m - 1) {
+                    System.out.println(cnt + 1);
+                    System.exit(0);
+                }
+                for (int i = 0; i < dx.length; i++) {
+                    int curX = cur[0] + dx[i];
+                    int curY = cur[1] + dy[i];
+                    if (!isValid(curX, curY)) {
+                        continue;
+                    }
+
+                    visited[curX][curY] = true;
+                    d.add(new int[]{curX, curY});
+                }
             }
             cnt++;
         }
 
-        System.out.println(lv);
+        System.out.println(cnt);
     }
 
     private static boolean isValid(final int curX, final int curY) {
