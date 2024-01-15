@@ -9,6 +9,7 @@ public class Subway {
     static Set<Integer> cycle = new HashSet<>();
     static boolean[] visited;
     static boolean findCycle;
+    static int[] answer;
 
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -32,6 +33,9 @@ public class Subway {
         }
 
         //순환선 찾기
+        answer = new int[n + 1];
+        Arrays.fill(answer, -1);
+
         for (int i = 1; i <= n; i++) {
             visited[i] = true;
             recursion(i, 1, i);
@@ -44,11 +48,6 @@ public class Subway {
         }
 
         //정답 입력하기
-        int[] answer = new int[n + 1];
-        Arrays.fill(answer, -1);
-        for (int i : cycle) {
-            answer[i] = 0;
-        }
         Deque<Integer> d = new LinkedList<>();
         d.addAll(cycle);
 
@@ -83,6 +82,7 @@ public class Subway {
             if (n == start && cnt > 2) {
                 findCycle = true;
                 cycle.add(num);
+                answer[num] = 0;
                 return;
             }
 
