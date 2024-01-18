@@ -5,14 +5,19 @@ import java.util.*;
 
 public class Bridge {
 
+    static boolean[][] visited;
+    static int[] dx = new int[]{1, -1, 0, 0};
+    static int[] dy = new int[]{0, 0, 1, -1};
+    static int n;
+    static int[][] map;
+    static List<Set<int[]>> edge = new ArrayList<>();
+
+
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        int[] dx = new int[]{1, -1, 0, 0};
-        int[] dy = new int[]{0, 0, 1, -1};
-
-        int n = Integer.parseInt(br.readLine());
-        int[][] map = new int[n][n];
-        boolean[][] visited = new boolean[n][n];
+        n = Integer.parseInt(br.readLine());
+        map = new int[n][n];
+        visited = new boolean[n][n];
 
         StringTokenizer st;
         for (int i = 0; i < n; i++) {
@@ -22,55 +27,21 @@ public class Bridge {
             }
         }
 
-        List<Set<int[]>> edge = new ArrayList<>();
-
         //섬들 찾기
-        int islandCnt = 0;
+        int islandNum = 1;
 
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
-                if (map[i][j] == 0 || visited[i][j]) {
-                    continue;
-                }
-                islandCnt++;
-                map[i][j] = islandCnt;
-                edge.add(new HashSet<>());
-                edge.get(islandCnt - 1).add(new int[]{i, j});
-                Deque<int[]> d = new LinkedList<>();
-                d.add(new int[]{i, j});
-                while (!d.isEmpty()) {
-                    int len = d.size();
-                    for (int k = 0; k < len; k++) {
-                        int[] cur = d.poll();
-
-                        for (int l = 0; l < dx.length; l++) {
-                            int curX = cur[0] + dx[l];
-                            int curY = cur[1] + dy[l];
-                            if (curX < 0 || curY < 0 || curX >= n || curY >= n) {
-                                continue;
-                            }
-
-                            if (map[curX][curY] == 0) {
-                                edge.get(islandCnt - 1).add(new int[]{cur[0], cur[1]});
-                                visited[curX][curY] = true;
-                                continue;
-                            }
-                            if (visited[curX][curY]) {
-                                continue;
-                            }
-
-                            visited[curX][curY] = true;
-                            map[curX][curY] = islandCnt;
-                            d.add(new int[]{curX, curY});
-                        }
-                    }
+                if (map[i][j] != 0 && !visited[i][j]) {
+                    edge.add(new HashSet<>());
+                    edge.get(islandNum - 1).add(new int[]{i, j});
+                    dfs(i, j, islandNum++);
                 }
             }
         }
 
         //거리 구하기
         int minDis = Integer.MAX_VALUE;
-        int islandNum;
         int distance;
         for (int i = 0; i < edge.size(); i++) {
             islandNum = i + 1;
@@ -106,6 +77,28 @@ public class Bridge {
         }
 
         System.out.println(minDis);
+    }
+
+    private static void dfs(int x, int y, int islandNum) {
+        visited[x][y] = true;
+        map[x][y] = islandNum;
+
+        for (int i = 0; i < dx.length; i++) {
+            int curX = x + dx[i];
+            int curY = y + dy[i];
+
+            if (curX < 0 || curY < 0 || curX >= n || curY >= n || visited[curX][curY]) {
+                continue;
+            }
+
+            if (map[curX][curY] == 0) {
+                edge.get(islandNum - 1).add(new int[]{x, y});
+                continue;
+            }
+
+            dfs(curX, curY, islandNum);
+        }
+
     }
 
 }
