@@ -1,73 +1,91 @@
 package BOJ.tree;
 
 import java.io.*;
-import java.util.*;
+
+class Node {
+
+    char data;
+    Node left;
+    Node right;
+
+    public Node(final char data) {
+        this.data = data;
+    }
+}
+
+class Tree {
+
+    Node root;
+
+    public void createNode(char data, char leftData, char rightData) {
+        if (root == null) {
+            root = new Node(data);
+            root.left = leftData == '.' ? null : new Node(leftData);
+            root.right = rightData == '.' ? null : new Node(rightData);
+        } else {
+            searchNode(root, data, leftData, rightData);
+        }
+    }
+
+    private void searchNode(final Node node, final char data,
+        final char leftData, final char rightData) {
+        if (node == null) {
+            return;
+        } else if (node.data == data) {
+            node.left = leftData == '.' ? null : new Node(leftData);
+            node.right = rightData == '.' ? null : new Node(rightData);
+        } else {
+            searchNode(node.left, data, leftData, rightData);
+            searchNode(node.right, data, leftData, rightData);
+        }
+    }
+
+    public void preOrder(Node node) {
+        if (node != null) {
+            System.out.print(node.data);
+            preOrder(node.left);
+            preOrder(node.right);
+        }
+    }
+
+    public void inOrder(Node node) {
+        if (node != null) {
+            inOrder(node.left);
+            System.out.print(node.data);
+            inOrder(node.right);
+        }
+    }
+
+    public void postOrder(Node node) {
+        if (node != null) {
+            postOrder(node.left);
+            postOrder(node.right);
+            System.out.print(node.data);
+        }
+    }
+}
 
 public class RecurseTree {
-
-    private static final int ASCII_VALUE = 65;
-    static StringBuilder sb = new StringBuilder();
-    static List<List<Integer>> tree;
-    static boolean[] visited;
 
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
         int n = Integer.parseInt(br.readLine());
-        tree = new ArrayList<>();
-        for (int i = 0; i < n; i++) {
-            tree.add(new ArrayList<>());
-        }
+        Tree tree = new Tree();
 
         for (int i = 0; i < n; i++) {
             String input = br.readLine();
-            int root = input.charAt(0);
-            int left = input.charAt(2);
-            int right = input.charAt(4);
-            tree.get(root - ASCII_VALUE).add(left);
-            tree.get(root - ASCII_VALUE).add(right);
+            char root = input.charAt(0);
+            char left = input.charAt(2);
+            char right = input.charAt(4);
+            tree.createNode(root, left, right);
         }
-        post(0);
-        sb.append("\n");
 
-        mid(0);
-        sb.append("\n");
+        tree.preOrder(tree.root);
+        System.out.println();
+        tree.inOrder(tree.root);
+        System.out.println();
+        tree.postOrder(tree.root);
 
-        back(0);
-        System.out.println(sb);
     }
-
-    private static void back(final int idx) {
-        for (int n : tree.get(idx)) {
-            if ((char) n == '.') {
-                continue;
-            }
-            back(n - ASCII_VALUE);
-        }
-        sb.append((char) (idx + ASCII_VALUE));
-    }
-
-    private static void mid(final int idx) {
-        int left = tree.get(idx).get(0);
-        int right = tree.get(idx).get(1);
-
-        if ((char) left != '.') {
-            mid(left - ASCII_VALUE);
-        }
-        sb.append((char) (idx + ASCII_VALUE));
-        if ((char) right != '.') {
-            mid(right - ASCII_VALUE);
-        }
-    }
-
-    private static void post(final int idx) {
-        sb.append((char) (idx + ASCII_VALUE));
-        for (int n : tree.get(idx)) {
-            if ((char) n == '.') {
-                continue;
-            }
-            post(n - ASCII_VALUE);
-        }
-    }
-
 }
