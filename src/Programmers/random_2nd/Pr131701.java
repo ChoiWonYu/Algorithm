@@ -6,24 +6,14 @@ public class Pr131701 {
 
     public int solution(int[] elements) {
         Set<Integer> s = new HashSet<>();
-
         int len = elements.length;
-        int[] arr = new int[2 * len];
-        arr[0] = elements[0];
-        for (int i = 1; i < 2 * len; i++) {
-            arr[i] = arr[i - 1] + elements[i % len];
-        }
-
-        for (int i = 0; i < len * 2; i++) {
-            if (i < len) {
-                s.add(arr[i]);
-                for (int j = 0; j < i; j++) {
-                    s.add(arr[i] - arr[j]);
+        for (int i = 1; i <= len; i++) {
+            for (int j = 0; j < len; j++) {
+                int sum = 0;
+                for (int k = j; k < i + j; k++) {
+                    sum += elements[k % len];
                 }
-            } else {
-                for (int j = i - (len - 1); j < i; j++) {
-                    s.add(arr[i] - arr[j]);
-                }
+                s.add(sum);
             }
         }
         return s.size();
