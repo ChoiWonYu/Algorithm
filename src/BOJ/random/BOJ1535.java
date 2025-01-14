@@ -7,37 +7,32 @@ import java.util.StringTokenizer;
 
 public class BOJ1535 {
 
-    public static int[] hp, happy;
-    public static int n, answer = 0;
-
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        n = Integer.parseInt(br.readLine());
-        hp = new int[n];
-        happy = new int[n];
+        int n = Integer.parseInt(br.readLine());
+        int limit = 100;
+
+        int[] hp = new int[n + 1];
+        int[] happy = new int[n + 1];
+        int[][] dp = new int[n + 1][limit];
 
         StringTokenizer hpst = new StringTokenizer(br.readLine());
         StringTokenizer happySt = new StringTokenizer(br.readLine());
-        for (int i = 0; i < n; i++) {
+        for (int i = 1; i <= n; i++) {
             hp[i] = Integer.parseInt(hpst.nextToken());
             happy[i] = Integer.parseInt(happySt.nextToken());
         }
 
-        dfs(100, 0, 0);
-        System.out.println(answer);
-    }
-
-    public static void dfs(int curHp, int curHappy, int idx) {
-        if (curHp <= 0) {
-            return;
-        }
-        if (idx == n) {
-            answer = Math.max(answer, curHappy);
-            return;
+        for (int i = 1; i <= n; i++) {
+            for (int j = 1; j < limit; j++) {
+                if (j >= hp[i]) {
+                    dp[i][j] = Math.max(dp[i - 1][j], dp[i - 1][j - hp[i]] + happy[i]);
+                } else {
+                    dp[i][j] = dp[i - 1][j];
+                }
+            }
         }
 
-        dfs(curHp - hp[idx], curHappy + happy[idx], idx + 1);
-        dfs(curHp, curHappy, idx + 1);
+        System.out.println(dp[n][limit - 1]);
     }
-
 }
